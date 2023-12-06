@@ -26,7 +26,7 @@ def parse_input(calibration_string):
 
     for word, indices in word_index:
         for index in indices:
-            output_string = output_string.replace(word, number_words[word])
+            output_string = output_string[:index] + number_words[word] + output_string[index+1:]
 
     print(word_index)
 
