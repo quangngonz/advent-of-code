@@ -1,6 +1,7 @@
 
 file_content = open('day1.txt', 'r')
 calibration_list = file_content.read().split('\n')
+file_content.close()
 
 total = 0
 
