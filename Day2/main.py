@@ -67,4 +67,4 @@ for index, game in enumerate(games):
     print("Game {} \t| Min cubes: Red: {} \t| Green: {} \t| Blue: {} \t| Power: {}".format(index+1, min_cubes[0], min_cubes[1], min_cubes[2], power))
     total_power += power
 
-print(total_power)
+print("Total power:",total_power)
