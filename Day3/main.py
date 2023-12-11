@@ -67,8 +67,6 @@ def check_valid(value, index, line):
     print("__________________________________________________________")
     return validity
 
-
-
 value_index_by_lines = []
 value_and_valid = []
 
