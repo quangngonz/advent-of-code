@@ -43,7 +43,9 @@ for index, card in enumerate(cards):
         if number in winning_numbers:
             winning_numbers_card.append(number)
     
+    points = calculate_points(winning_numbers_card)
+
     print("Card: {} \tPoints: {} \tWinning: {}".format(index+1, points, winning_numbers_card))
-    total_points += calculate_points(winning_numbers_card)
+    total_points += points
 
 print("Total", total_points)
