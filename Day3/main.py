@@ -9,6 +9,11 @@ data_table = []
 for text in input_text:
     data_table.append([*text])
 
+def find_all_numbers(input_line):
+    matches = re.finditer(r'\d+', input_line)
+    values = [(int(match.group()), match.start()) for match in matches]
+    return values
+
 def find_all_asterisks(input_string):
     matches = re.finditer(r'\*', input_string)
     asterisk_locations = [match.start() for match in matches]
@@ -53,9 +58,11 @@ def get_value_and_surroundings(value, index, line):
     return surroundings_lines
 
 asterisk_locations = []
+numbers_locations = []
 
 for line in input_text:
     asterisk_locations.append(find_all_asterisks(line))
+    numbers_locations.append(find_all_numbers(line))
 
 for line_no, locations in enumerate(asterisk_locations):
     if locations != False:
@@ -64,4 +71,3 @@ for line_no, locations in enumerate(asterisk_locations):
             print(get_value_and_surroundings("*", location, line_no))
     else:
         print("Line {} doesn't include *".format(line_no))
-    
