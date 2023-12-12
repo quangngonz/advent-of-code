@@ -80,15 +80,15 @@ def calculate_gear_ratio(surroundings, line_no, index):
                     include_no = True
 
     if include_no == False:
-        return False
+        return False, []
     else:
         res = []
         [res.append(x) for x in no_value if x not in res]
         # print(no_value, res)
         if len(res) == 1:
-            return False
+            return False, res
         else:
-            return res[0] * res[1]
+            return res[0] * res[1], res
 
 asterisk_locations = []
 numbers_locations = []
@@ -111,10 +111,10 @@ for line_no, locations in enumerate(asterisk_locations):
         print("Line",line_no)
         for location in locations:
             surrounding = get_value_and_surroundings("*", location, line_no)
-            ratio = calculate_gear_ratio(surrounding, line_no, location)
+            ratio, no = calculate_gear_ratio(surrounding, line_no, location)
             if ratio != False:
                 total += ratio
-            print(ratio, surrounding)
+            print(ratio, surrounding, no)
     else:
         print("Line {} doesn't include *".format(line_no))
     
