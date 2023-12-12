@@ -9,11 +9,14 @@ data_table = []
 for text in input_text:
     data_table.append([*text])
 
-def get_values_index(input_line):
-    matches = re.finditer(r'\d+', input_line)
-    values = [(int(match.group()), match.start()) for match in matches]
-    return values
-
+def find_all_asterisks(input_string):
+    matches = re.finditer(r'\*', input_string)
+    asterisk_locations = [match.start() for match in matches]
+    if asterisk_locations:
+        return asterisk_locations
+    else:
+        return False
+    
 def get_surrounding_lines(line):
     if line ==0:
         surroundings_lines = input_text[0: 2]
@@ -36,7 +39,7 @@ def get_start_stop(index, value):
 
 def get_value_and_surroundings(value, index, line):
     global data_table
-    surroundings_lines = get_surrounding_lines()
+    surroundings_lines = get_surrounding_lines(line)
     # print("Value: {} Start: {} End: {} Line: {}".format(value, index, len(str(value))+index , line))
 
     start_column, stop_collumn = get_start_stop(index, value)
@@ -49,40 +52,16 @@ def get_value_and_surroundings(value, index, line):
     # print(surroundings_lines)
     return surroundings_lines
 
-def check_valid(value, index, line):
-    validity = False
-    surrounding_lines = get_value_and_surroundings(value, index, line)
-
-    check_symbol = re.compile("[!@#$%&*()_+=|<>?{}\\[\\]/~-]")
-    for line_content in surrounding_lines:
-        if check_symbol.search(line_content):
-            validity = True
-
-    print("Value: {} Start: {} End: {} Line: {}".format(value, index, len(str(value))+index , line))
-    
-    for line_content in surrounding_lines:
-        print(line_content)
-
-    print("Validity:", validity)
-    print("__________________________________________________________")
-    return validity
-
-value_index_by_lines = []
-value_and_valid = []
+asterisk_locations = []
 
 for line in input_text:
-    value_index_by_lines.append(get_values_index(line))
+    asterisk_locations.append(find_all_asterisks(line))
 
-for line, line_numbers in enumerate(value_index_by_lines):
-    print("Line {}: {}".format(line, line_numbers))
-    for value, index in line_numbers:
-        value_validity = check_valid(value, index, line)
-        value_and_valid.append((value, value_validity))
-
-sum_parts = 0
-
-for value, valid in value_and_valid:
-    if valid:
-        sum_parts += value
-
-print("Sum of parts:", sum_parts)
+for line_no, locations in enumerate(asterisk_locations):
+    if locations != False:
+        print("line",line_no)
+        for location in locations:
+            print(get_value_and_surroundings("*", location, line_no))
+    else:
+        print("Line {} doesn't include *".format(line_no))
+    
