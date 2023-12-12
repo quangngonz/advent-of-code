@@ -67,8 +67,32 @@ def get_value_and_surroundings(value, index, line):
     # print(surroundings_lines)
     return surroundings_lines
 
+def calculate_gear_ratio(surroundings, line_no, index):
+    include_no = False
+    no_value = []
+
+    for row, line in enumerate(surroundings):
+        table_row = line_no + row-1
+        for location, value in enumerate([*line]):
+            table_collumn = index + location-1
+            if value != "*" and value != ".":
+                    no_value.append(data_table[table_row][table_collumn])
+                    include_no = True
+
+    if include_no == False:
+        return False
+    else:
+        res = []
+        [res.append(x) for x in no_value if x not in res]
+        # print(no_value, res)
+        if len(res) == 1:
+            return False
+        else:
+            return res[0] * res[1]
+
 asterisk_locations = []
 numbers_locations = []
+total = 0
 
 for line in input_text:
     asterisk_locations.append(find_all_asterisks(line))
@@ -84,8 +108,14 @@ for row, line in enumerate(numbers_locations):
 
 for line_no, locations in enumerate(asterisk_locations):
     if locations != False:
-        print("line",line_no)
+        print("Line",line_no)
         for location in locations:
-            print(get_value_and_surroundings("*", location, line_no))
+            surrounding = get_value_and_surroundings("*", location, line_no)
+            ratio = calculate_gear_ratio(surrounding, line_no, location)
+            if ratio != False:
+                total += ratio
+            print(ratio, surrounding)
     else:
         print("Line {} doesn't include *".format(line_no))
+    
+print(total)
