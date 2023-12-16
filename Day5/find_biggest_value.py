@@ -23,9 +23,10 @@ def find_max(input_list):
 
     return max_source, max_destination
 
-data = parse_data()
+# Test cases
+# data = parse_data()
 
-seeds = data[0][1][0]
-seed_to_soil = data[1]
+# seeds = data[0][1][0]
+# seed_to_soil = data[1]
 
-print(find_max(seed_to_soil))
+# print(find_max(seed_to_soil))
