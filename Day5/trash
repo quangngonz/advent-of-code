@@ -1,0 +1,7 @@
+seed_to_soil = ("seed_to_soil", 1)
+soil_to_fertilizer = ("soil_to_fertilizer", 2)
+fertilizer_to_water = ("fertilizer_to_water", 3)
+water_to_light = ("water_to_light", 4)
+light_to_temperature = ("light_to_temperature", 5)
+temperature_to_humidity = ("temperature_to_humidity", 6)
+humidity_to_location = ("humidity_to_location", 7)
