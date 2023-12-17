@@ -5,3 +5,17 @@ water_to_light = ("water_to_light", 4)
 light_to_temperature = ("light_to_temperature", 5)
 temperature_to_humidity = ("temperature_to_humidity", 6)
 humidity_to_location = ("humidity_to_location", 7)
+
+
+for test_index in range(len(maps)):
+    print(maps[test_index][0])
+
+    for index, numbers in enumerate(maps[test_index][1]):
+        no_range = numbers[2]
+        try:
+            end_source = (numbers[0] + no_range) == maps[test_index][1][index+1][0]
+        except:
+            end_source = "End value"
+
+        if end_source == False:
+            print(numbers, "e_source: {} {} {}".format(numbers[0] + no_range, maps[test_index][1][index+1][0], end_source))

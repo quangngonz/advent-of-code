@@ -11,7 +11,7 @@ def create_list(max_no):
 data = parse_data()
 default_list = create_list(10)
 
-names = ["seeds", "seed_to_soil", "soil_to_fertilizer", "fertilizer_to_water", "light_to_temperature", "temperature_to_humidity", "humidity_to_location"]
+map_names = ["seed_to_soil", "soil_to_fertilizer", "fertilizer_to_water", "light_to_temperature", "temperature_to_humidity", "humidity_to_location"]
 
 seeds = data[0][1][0]
 maps = data[1:]
@@ -23,15 +23,42 @@ for index, mapping in enumerate(maps):
     sorted_map = sort_map(mapping)
     maps[index] = sorted_map
 
-for test_index in range(len(maps)):
-    print(maps[test_index][0])
+def find_dest(source, mapping):
+    destination = source
 
-    for index, numbers in enumerate(maps[test_index][1]):
-        no_range = numbers[2]
-        try:
-            end_source = (numbers[0] + no_range) == maps[test_index][1][index+1][0]
-        except:
-            end_source = "End value"
+    mapping_name = mapping[0].split(" ")[0]
+    source_name , _, destination_name = mapping_name.split("-")
+    map_numbers = mapping[1]
 
-        if end_source == False:
-            print(numbers, "e_source: {} {} {}".format(numbers[0] + no_range, maps[test_index][1][index+1][0], end_source))
+    for source_start, dest_start, map_range in map_numbers:
+        source_end = source_start + map_range - 1
+        
+        if source_start <= source <= source_end:
+            difference = source - source_start
+            destination = dest_start + difference
+
+            print()
+            print(mapping_name)
+            print(source_start, dest_start, map_range)
+
+    return source_name, destination_name, destination
+
+all_answers = []
+
+for seed in seeds:
+    seed_values = [seed]
+
+    for index in range(len(map_names)):
+        source_name, dest_name, dest = find_dest(seed_values[-1], maps[index])
+
+        print(source_name, seed_values[-1], dest_name, dest)
+
+        seed_values.append(dest)
+    
+    all_answers.append(seed_values)
+    
+    print("_______________________________________________")
+
+all_answers = sorted(all_answers, key=lambda x: x[-1])
+
+print(all_answers[0])
