@@ -1,6 +1,6 @@
 import re
 
-input_file = open('input.txt', 'r')
+input_file = open('input_2.txt', 'r')
 input_text = input_file.read()
 input_text = input_text.split('\n')
 
@@ -36,7 +36,7 @@ def get_start_stop(index, value):
 
 def get_value_and_surroundings(value, index, line):
     global data_table
-    surroundings_lines = get_surrounding_lines()
+    surroundings_lines = get_surrounding_lines(line)
     # print("Value: {} Start: {} End: {} Line: {}".format(value, index, len(str(value))+index , line))
 
     start_column, stop_collumn = get_start_stop(index, value)

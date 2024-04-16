@@ -1,6 +1,6 @@
 
 def parse_games():
-    input_file = open('input.txt', 'r')
+    input_file = open('input_2.txt', 'r')
     games = input_file.read()
     games = games.split('\n')
 

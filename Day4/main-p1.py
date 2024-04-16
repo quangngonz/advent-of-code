@@ -1,6 +1,6 @@
 import re
 
-input_file = open('input.txt', 'r')
+input_file = open('input_2.txt', 'r')
 input_text = input_file.read()
 input_text = input_text.split('\n')
 

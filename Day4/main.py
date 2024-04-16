@@ -41,9 +41,13 @@ def process_input_file(file_name):
 
     return cards_winning_numbers
 
-winning_copies = [1] * 198
+def get_no_of_scratchcards(file_name):
+    results = process_input_file(file_name)
+    return len(results)
 
-file_name = 'input.txt'
+winning_copies = [1] * get_no_of_scratchcards('input_2.txt')
+
+file_name = 'input_2.txt'
 results = process_input_file(file_name)
 
 for card_no, result in enumerate(results):

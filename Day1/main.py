@@ -1,5 +1,5 @@
 
-file_content = open('day1.txt', 'r')
+file_content = open('day1_2.txt', 'r')
 calibration_list = file_content.read().split('\n')
 file_content.close()
 
